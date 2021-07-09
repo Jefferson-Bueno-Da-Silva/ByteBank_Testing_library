@@ -9,15 +9,24 @@ describe('Componente de Transação do extrato', () => {
     it('O snapshot do componente deve permanecer sempre o mesmo', () => {
         const {
             container
-        } = render( <
-            Conta saldo = {
-                100
-            }
-            realizarTransacao = {
-                () => {}
-            }
+        } = render( <Conta
+                saldo = {
+                    100
+                }
+                realizarTransacao = {
+                    () => {}
+                }
             />
         )
         expect(container.firstChild).toMatchSnapshot();
+    });
+});
+
+describe('Componente de conta', () => {
+    it('Exibir o saldo da conta com a formatação monetária', () => {
+        render(<Conta saldo={1000}/>)
+        const saldo = screen.getByTestId('saldo-conta');
+
+        expect(saldo.textContent).toBe('R$ 1000');
     });
 });
